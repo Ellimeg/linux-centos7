@@ -1,0 +1,48 @@
+Learn CentOS Linux Network Services
+Authors: Vazquez, Antonio 
+
+https://www.learnenough.com/command-line-tutorial#sec-basics
+
+//------------------
+TODO. Disable selinux (this will stop us installing stuf and is enabled by default for CentOS 7 installs
+	11.1 login as root
+	11.2 Check selinux status: ]# sestatus
+	11.2 ]# nano /ctc/selinux/config	
+
+	
+	When using NAT with VirtualBox, by default the IP adress will always be 10.0.2.15 for every new virtual machine.
+	To use SSH to connect from your host to the VrtualBox behind NAT, you mest setup and use Port Forwarding on each VM.
+	9.1 In Settings > Network > Adapter 1 tab > Advanced > Click Port Forwarding button to display the Port Forwarding Rules dialog
+	9.2 Click green "+" icon to add new rule:
+		Change Name from Rule 1 to SSH
+		Leave the protocol as TCP
+		Leave the Host IP field blanck (empty)
+		Set the Host Port to some unused port on yout Host O/S (e.g. 2222ce) And make sure you choose a port that is unique for this virtual machine
+		If you have multiple Virtual Box VMs, each will need a different Host Port number.
+		Set Guest Port 22
+		Click OK
+
+	Minimal Install: Basic finctionality
+	Compute Node:	Installation for performing computation and processing
+	Infrastructure Server:	Server for operating network infrastructure services
+	File and Print Server:	File print and storage server for enterprise
+	Basic Web server:	Server for serving static and dynamic web content
+	Virtualization Server:	Minimal virtulization host
+	Server with GUI:	Server for operating network infrastructure services with a GUI
+	GNOME Desktop:		GNOME is a highly intuitive and friendly desktop
+	KDE plasma Workspaces:	The KDE plasma Workspaces is a highly-configerable graphicaL user interface  which includes a panel,
+				desktop, system icons, and desktop widgets, and nmany powerful KDE applications
+	Developement and Creative Work Station:	WS for software hardware, graphics or content developemnt.
+
+
+ 
+
+
+	
+	
+	
+
+	
+	
+	
+

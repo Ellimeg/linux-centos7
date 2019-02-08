@@ -1,0 +1,14 @@
+Hardware Settings
+- Peudo file system: like registry (HKLocal Machine): 
+	hold info about the current configuration (incl whats plugged in, available RAM, No. CPUs etc)
+-
+All terms of run levels within linux:
+	Start,Stop, rebotting
+	incl stop start services (e.g how to get an apache server or remote access shell server to autostart on boot)
+
+Contolling machine:
+
+GRUB: Grand Unified Boot loader: choose which OS to boot too.
+
+Software Management
+	Installing and removing

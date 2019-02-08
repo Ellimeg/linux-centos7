@@ -1,0 +1,40 @@
+1. Check networking ( as it may not work after the installation)
+	1.1 Check network cards
+	]# ip a s
+	You should see three entries
+		1. lo: loopback 127.0.0.1/8
+		2. enp0s3: ether inet 10.0.2.4/24 <= NAT Network
+		3. enp0s8: ether inet 192.168.99.101/24 <= Host Only network
+	]# nmcli conn show
+		You should see a list of 2 ethernet connections (both in green)
+		enp0s8 may be down (not green & missing an entry in DEVICE column)
+	1.2 Activte down connection(s):
+	]# nmcli conn up enp0s8
+		You should get:
+		Connection successfully activated...
+		If error: Connection activation failed: IP configuaration could not be reserved (noavailable address, timout, etc)
+		Likely due to you updating Virtual Box and not resetting Adaptor 2 (see 1_Install CentOS 7 to Virtual Box>5.4 Network).
+		To correct ths:
+			1.2.1 Power off the VS
+			1.2.2 VS1CentOs7 > Networks > Adaptor 2 > Name: Virtual Host-Only Ethernet Adaptor #n (where n is the highest numbr)>OK
+			1.2.3 Power up VS1CentOS7 > login as root >
+				]# nmcli conn show 					client connection show
+				You should see a list of 2 ethernet connections (both in green)
+				]# ip a s 						ip addresses show
+				You should see three entries as 1.1
+
+2. BUT WE NEED TO MAKE SURE THIS HAPPENS ALL THE TIME
+	2.1 (As it stands we would have to activate enp0s8 evrytime we logged in)
+	To Fix edit the file using sed (we dont have nanao installed as yet!)
+	]# sed -i s/ONBOOT=no/ONBOOT=yes/ /etc/sysconfig/network-scripts/ifcfg-enp0s3
+		<up key back-sapce to just change 3 to 8>
+	]# sed -i s/ONBOOT=no/ONBOOT=yes/ /etc/sysconfig/network-scripts/ifcfg-enp0s8
+		To check use grep to search for text in a file. use it with last argument
+		you should see ONBOOT=yes
+	]# grep ONBOOT !$	
+		<up key back-sapce to just change 8 to 3>
+		you should see ONBOOT="yes" quote marks are not important (optional) they just mean we did the update.
+	 
+
+			
+	

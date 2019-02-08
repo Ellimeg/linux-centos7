@@ -1,0 +1,108 @@
+From:
+Pluralsight: Learning the essentials of CentOS Enterprise Linux Administration - Andrew Mallett.
+
+CentOS Linux is a community-supported distribution derived from sources freely provided to the public by Red Hat for Red Hat Enterprise Linux (RHEL).
+	As such, CentOS Linux aims to be functionally compatible with RHEL. The CentOS Project mainly changes packages to remove upstream vendor branding and artwork.
+	CentOS Linux is no-cost and free to redistribute.
+	Each CentOS version is maintained for up to 10 years (by means of security updates -- the duration of the support interval by Red Hat has varied over time with respect to Sources released).
+	A new CentOS version is released approximately every 2 years and each CentOS version is periodically updated (roughly every 6 months) to support newer hardware.
+	This results in a secure, low-maintenance, reliable, predictable and reproducible Linux environment.
+
+1. 	GOTO https://www.centos.org/
+	Click Download Centos => 2 options DVD ISO (4G Only SW that can be installed during install) or Minimal ISO (CD size: 600MG)
+	download http://mirror.mhd.uk.as44574.net/mirror.centos.org/7.6.1810/isos/x86_64/CentOS-7-x86_64-Minimal-1810.iso
+	
+Oracle VB is free: open source and any virtual machine can run on any OS
+
+2.	Download Oracle VM Virtual Box from: https://www.virtualbox.org/wiki/Downloads
+	VirtualBox-6.0.2-128162-Win.exe. Install as admin. After installation VB will open on the Mnager screen
+	
+3.Create NatNetwork preference:
+	3.1 Click Preferernces > Network > Clck Green icon to add NatNetwork (with Active ticked)
+	3.2 Accept defaults. 
+		Network Name: NatNetwork
+		Network CIDR: 10.0.2.0/24 <-- leave ip range as sufficient
+		Supports DHCP yes
+		Supports IPv6: No
+	But if u want to change:
+		Double click NatNetwork (or click the green icon with the settings cog) > Nat Network Details dialog
+
+	To get Card to connect back Use Host-Only Adaptor
+	
+4. Create New VM:
+	4.1 Click the New icon in the main tool bar
+		OR On menu bar Click Machine > New
+		OR Ctrl+N
+	4.2 Name your VM:
+		Name: VS1CentOS7 (Virtual Server 1 ...)
+		Machine folder E:\VMs <--put it on Hard drive
+		Note if you paste the name above in the next two fields will default to:
+		Type: Linux
+		Version: Red Hat (64-bit)
+	     If Only 32-bit versions are shown: 
+		GoTo Turn Windows features on or off & turn Hyper V off! & Reboot laptop
+		Click Next
+	4.3 Set Memory 
+		At least 1280 MB RAM is required to install and use CentOS-7 (1810).
+		When using the Live ISOs for install, 1280 MB RAM produces very slow results and even some install failures.
+		At least 1536 MB RAM is recommended for LiveGNOME or LiveKDE installs.
+		(default to 1024) Set to X2 = 2048 > Click Next
+	4.4 Create a Virtual hard disk now with default size 8GB > Click Create
+	4.5 Set Hard disk file type
+		Accept default (VDI) > Click Next
+	4.6 Set Storage on disk
+		Accept default (Dynamically allocated) means it will grow to a max of 8GB as needed.
+		Fixed state sets disk to 8GB from he start. > Click Next
+	4.7 Set name of the Virtual Hard Disk file (defaults to server name)
+		Minimum size of HD for Centos is 8GB set to 20GB accept > Click Create: Done!
+
+5. Adjust Settings:
+	Select VS1CentOS7 > Settings >
+	5.1 General > Advanced Set Shared Clipboard & Drag'n Dop: Bidirectional (to allow copy and paste between host and vm)
+	5.2 System >
+		Motherboard: Pointing Dvice: Defaults to PS/2 Mouse. THIS MAY NOT WORK! i.e. Mouse dissappears in VM
+				If so try on eof the others: USB Tablet or USB Multitouch Tablet.
+		Processor: set Processors: 2
+		Check that PAE/NX feature is enabled or virtual box will not install CentOS
+		Extended Features will be ticked. Click OK
+	5.3 Storage > Click DVD icon (empty) > Move to the right Optical Drive DVD icon & Click it > Click Select Virtual Optical disk drve
+		Browse to E:\VMs\ISOs\CentOS-7-i386-NetInstall-1810.iso (I'd moved it here from download) > Click OK
+		Note we will add the graphical UI in later (don't have to take the default GNOME)
+	5.4 Network
+		Adapter1 tab: set Attached to: NAT Network & Name: NatNetwork
+		Adapter2 tab: Enable & set Attached to: Host-Only Adapter & Name: VirtualBox Host-Only Ethernet Adapter
+	5.5 (Optional) Disable unnecessary hardware:
+		Audio > Uncheck Enable Audio Click OK
+		USB > Uncheck Enable USB Controller Click OK
+
+8. Boot (Start) CentOS:
+	8.1 Under System > Note Boot Order is Floppy then Optical then Hard Disk thats the order of seraching for the iso.
+	With VM selected, click Green Start icon OR Right Click VM > Start > Normal Start
+	You should see the CentOS installation screen
+	Use the Up arrow Select Install CentOS7 -> The line will go white once selected.
+	After some cmds flit by you will be presented with the Welcome to Centos 7 screen
+
+9. Setting Mouse:
+	Once You see the Welcome To Centos In top tool bar Click on Input > Mouse Integration
+	(this may take a few seconds to become available for selecting - keep looking)
+	Pointer changes look when used in VS compared to VH: a bigger arrow & pointy finger.			
+
+9. Settings made during Install: 
+	9.1 Network & Host Name: Should see 2 Ethernet entries; Turn both on.
+	Ethernet enp0s3 is connected to the NAT Network 10.0.2.1
+	Ethernet enp0s8 is connected to the Host
+	9.2 Change Host name: from localhost.localdomain to vs1.ellimeg.com
+
+10. Installation
+	Click the button named Begin Installation
+	During install you will be prompted to:
+	For 			user: root 
+	Set Root Password: 	LetM31n1234
+	Create User: full name: developer user
+				user: dev-user
+				pw: D3vU53r1234
+
+	Click Finish Installation > Wait (generates stuff) > 
+	Click Reboot > Eventually you will get cmd window with:
+	vs1 login:
+	Not the login prompt is text only as we haven't installed the graphical environmentdev

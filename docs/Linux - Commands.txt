@@ -1,0 +1,24 @@
+aas root show all network card details
+	]# ip a s
+Clear screen
+	]# ctrl + l
+as root list connections (=name client connections show)
+	]# nmcli conn show 
+Retype last entry
+	]# up arrow key
+in place editing:
+	]# sed -i s/ONBOOT=no/ONBOOT=yes/ <file to work on>
+	where sed = edit command
+	-i inplace
+	s = searching for first string (and substituting with second)
+	/// = deliminators for the substitution
+	<file to work on> for example /etc/sysconfig/network-scripts/ifcfg-enp0s3
+Last argument
+	]# !$
+Search for text in a file
+	]# grep ONBOOT /etc/sysconfig/network-scripts/ifcfg-enp0s3
+	or if your last argument was the file
+	]# grep ONBOOT !$
+	
+
+	
